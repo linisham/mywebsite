@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centered Bouncing Ball in Rectangle</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('metallic-shiny-blue-texture-background-2d-rendering_974100-21.jpg');
+            background-size: cover;
+        }
+
+        #container {
+            width: 400px;
+            height: 300px;
+            margin: 100px;
+            position: relative;
+            border: 2px solid #000;
+        }
+
+        #ball {
+            width: 50px;
+            height: 50px;
+            background-color: rgb(13, 12, 13);
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <div id="ball"></div>
+    </div>
+
+    <script>
+        const container = document.getElementById('container');
+        const ball = document.getElementById('ball');
+        let x = 0;
+        let y = 0;
+        let speedX = 5;
+        let speedY = 3;
+
+        function update() {
+            x += speedX;
+            y += speedY;
+
+            // Bounce off the walls of the rectangle
+            if (x + ball.offsetWidth > container.offsetWidth || x < 0) {
+                speedX = -speedX;
+            }
+
+            if (y + ball.offsetHeight > container.offsetHeight || y < 0) {
+                speedY = -speedY;
+            }
+
+            ball.style.transform = `translate(${x}px, ${y}px)`;
+
+            requestAnimationFrame(update);
+        }
+
+        // Start the animation
+        update();
+    </script>
+
+</body>
+</html>
